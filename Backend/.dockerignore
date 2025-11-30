@@ -1,0 +1,55 @@
+# Dependencies (will be installed in container)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Git
+.git/
+.gitignore
+
+# Environment files
+.env.local
+.env.development.local
+.env.test.local
+
+# Build outputs
+dist/
+build/
+
+# MinIO data (mounted as volume)
+minio-data/
+
+# Uploaded files (use volumes)
+uploads/
+temp/
+tmp/
+
+# Testing
+coverage/
+.nyc_output/
+*.test.js
+*.spec.js
+__tests__/
+
+# Documentation
+README.md
+*.md
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cache
+.cache/
+.eslintcache
