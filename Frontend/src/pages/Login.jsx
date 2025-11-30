@@ -23,9 +23,11 @@ const Login = () => {
     setLoading(true);
 
     try {
-      await login(formData);
-      toast.success("Welcome back!");
-      navigate("/dashboard");
+      const success = await login(formData);
+      if (success) {
+        toast.success("Welcome back!");
+        navigate("/dashboard");
+      }
     } catch (error) {
       toast.error(error.response?.data?.message || "Login failed");
     } finally {
@@ -103,8 +105,8 @@ const Login = () => {
               type="submit"
               disabled={loading}
               className={`w-full py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 ${loading
-                  ? "bg-gray-700 text-gray-400 cursor-not-allowed"
-                  : "bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-105 shadow-lg shadow-blue-500/20"
+                ? "bg-gray-700 text-gray-400 cursor-not-allowed"
+                : "bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-105 shadow-lg shadow-blue-500/20"
                 }`}
             >
               {loading ? (

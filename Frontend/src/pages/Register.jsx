@@ -9,7 +9,7 @@ const Register = () => {
   const { register } = useAuthStore();
 
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -36,13 +36,16 @@ const Register = () => {
     setLoading(true);
 
     try {
-      await register({
-        name: formData.name,
+      const success = await register({
+        username: formData.username,
         email: formData.email,
         password: formData.password,
       });
-      toast.success("Account created successfully!");
-      navigate("/dashboard");
+
+      if (success) {
+        toast.success("Account created successfully!");
+        navigate("/dashboard");
+      }
     } catch (error) {
       toast.error(error.response?.data?.message || "Registration failed");
     } finally {
@@ -87,8 +90,8 @@ const Register = () => {
                 <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={20} />
                 <input
                   type="text"
-                  name="name"
-                  value={formData.name}
+                  name="username"
+                  value={formData.username}
                   onChange={handleChange}
                   placeholder="John Doe"
                   required
@@ -160,8 +163,8 @@ const Register = () => {
               type="submit"
               disabled={loading}
               className={`w-full py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 ${loading
-                  ? "bg-gray-700 text-gray-400 cursor-not-allowed"
-                  : "bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-105 shadow-lg shadow-blue-500/20"
+                ? "bg-gray-700 text-gray-400 cursor-not-allowed"
+                : "bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-105 shadow-lg shadow-blue-500/20"
                 }`}
             >
               {loading ? (
